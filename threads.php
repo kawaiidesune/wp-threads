@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Threads 
-Plugin URI: http://crowdfavorite.com/wordpress/plugins/ 
+Plugin URI: https://veroniquebellamy.fr/ 
 Description: Provide context for an ongoing story by showing a timeline of related posts (with a link to that timeline from each post).
-Version: 1.0b1 
-Author: Crowd Favorite
-Author URI: http://crowdfavorite.com
+Version: 1.0
+Author: Véronique Bellamy
+Author URI: https://veroniquebellamy.fr/
 */
 
 // ini_set('display_errors', '1'); ini_set('error_reporting', E_ALL);
@@ -295,83 +295,8 @@ function cfth_asset_url($path) {
 }
 
 function cfth_timeline_css() {
-	$css = apply_filters('threads_timeline_css', '');
-	if (!empty($css)) {
-		echo $css;
-		return;
-	}
-?>
-<style>
-.threads-timeline {
-	background: transparent url(<?php echo cfth_asset_url('img/timeline.png'); ?>) repeat-y;
-	padding: 20px 0;
+	wp_enqueue_style('threads-css', plugin_dir_url(__FILE__) . 'wp-threads.css', array(), '1.0');
 }
-.threads-item .date {
-	color: #666;
-	display: inline-block;
-	font-size: 85%;
-	margin-right: 3px;
-	text-align: right;
-	width: 88px;
-}
-.threads-item .title {
-	background: transparent url(<?php echo cfth_asset_url('img/bullet-hollow.png'); ?>) left center no-repeat;
-	margin-left: 4px;
-	padding-left: 20px;
-}
-.threads-item .intersects {
-	font-size: 85%;
-	margin-left: 116px;
-}
-.threads-lat {
-	background: #fff url(<?php echo cfth_asset_url('img/lat.png'); ?>) no-repeat;
-	color: #999;
-	height: 110px;
-	line-height: 110px;
-	margin: 10px 0;
-	padding: 0 75px;
-	width: 410px;
-}
-@media screen and (max-width: 768px) {
-	.threads-timeline {
-		background-position: -90px 0;
-	}
-	.threads-item .date {
-		display: block;
-		line-height: 14px;
-		padding-left: 20px;
-		text-align: left;
-	}
-	.threads-item .title {
-		background-position: 5px 2px;
-		display: block;
-		margin-left: 0;
-	}
-	.threads-item .intersects {
-		line-height: 16px;
-		margin-left: 20px;
-	}
-}
-@media 	(min--moz-device-pixel-ratio: 1.5),
-		(-o-min-device-pixel-ratio: 3/2),
-		(-webkit-min-device-pixel-ratio: 1.5),
-		(min-device-pixel-ratio: 1.5),
-		(min-resolution: 144dpi),
-		(min-resolution: 1.5dppx) {
-	.threads-timeline {
-		background-image: url(<?php echo cfth_asset_url('img/timeline@2x.png'); ?>);
-		background-size: 105px 20px;
-	}
-	.threads-item .title {
-		background-image: url(<?php echo cfth_asset_url('img/bullet-hollow@2x.png'); ?>);
-		background-size: 11px 11px;
-	}
-	.threads-lat {
-		background-image: url(<?php echo cfth_asset_url('img/lat@2x.png'); ?>);
-		background-size: 410px 110px;
-	} 
-}
-</style>
-<?php
-}
+add_action( 'wp_enqueue_scripts', 'cfth_timeline_css' );
 
+?>
